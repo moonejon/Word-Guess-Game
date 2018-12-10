@@ -1,0 +1,47 @@
+html,
+body {
+  background-color: white;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.logo {
+  box-align: center;
+}
+
+img {
+  margin-bottom: 20px;
+}
+
+.container {
+  margin-top: -60px;
+}
+
+.jumbotron {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+#emptyWord {
+  text-align: center;
+  font-size: 45pt;
+}
+
+#remainingGuesses {
+  float: right;
+  font-size: 10pt;
+}
+
+#remainingLetters {
+  float: left;
+  font-size: 10pt;
+}
+
+.card {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
