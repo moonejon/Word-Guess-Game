@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Doctor Who Word Game</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -37,13 +37,14 @@
           <div class="card">
             <div class="card-body">
               <row>
-                <div id="remainingGuesses">Guesses Remaining: </div>
+                <div id="remainingGuesses"></div>
               </row>
               <row>
                   <div id="emptyWord"></div>
               </row>
               <row>
-                <div id="lettersGuessed">Letters guessed: </div>
+                <div id="lettersGuessed"></div>
+                <div id="wins"></div>
               </row>
             </div>
           </div>
@@ -52,10 +53,8 @@
      
    </div>
     </container>
-    <p id="randomMonster"></p>
-    <p id="lettersGuessed"></p>
 
-    <input type="text" onkeypress="keyWasPressed(event)" />
+    <p id="lettersGuessed"></p>
 
     <script type="text/javascript" src="assets/javascript/game.js"></script>
   </body>

@@ -35,8 +35,13 @@ img {
   font-size: 10pt;
 }
 
-#remainingLetters {
+#lettersGuessed {
   float: left;
+  font-size: 10pt;
+}
+
+#wins {
+  float: right;
   font-size: 10pt;
 }
 

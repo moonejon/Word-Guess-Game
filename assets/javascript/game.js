@@ -1,3 +1,10 @@
+// GLOBAL VARIABLES
+
+var wins = 0;
+var emptySpaces = [];
+var lettersGuessedArray = [];
+var lettersGuessed = "Letters guessed: ";
+var underscore = "_ ";
 var monsters = [
   "daleks",
   "zarbi",
@@ -8,45 +15,59 @@ var monsters = [
   "zygons"
 ];
 
-var randomMonster = monsters[Math.floor(Math.random() * monsters.length)];
-console.log(randomMonster);
+// GAME LOGIC
+function startGame() {
+  // Setting random monster
+  var randomMonster = monsters[Math.floor(Math.random() * monsters.length)];
+  var remainingGuesses = randomMonster.length + 5;
 
-var lettersGuessedArray = [];
-
-var lettersGuessed = "Letters guessed: " + lettersGuessedArray;
-var underscore = "_ ";
-var emptySpaces = [];
-function emptyWord(randomWord) {
-  for (i = 0; i < randomWord.length; i++) {
-    emptySpaces.push(underscore);
-  }
-  var emptySpacesWithoutCommas;
-  document.getElementById("emptyWord").innerHTML = emptySpaces.join("");
-}
-
-document.getElementById("randomMonster").innerHTML = randomMonster;
-
-emptyWord(randomMonster);
-function replaceWithGuess(userGuess) {
-  if (randomMonster.includes(userGuess)) {
-    var index = randomMonster.indexOf(userGuess);
-    emptySpaces.splice(index, 1, userGuess);
+  //resetting blank spaces
+  function emptyWord(randomWord) {
+    for (i = 0; i < randomWord.length; i++) {
+      emptySpaces.push(underscore);
+    }
     document.getElementById("emptyWord").innerHTML = emptySpaces.join("");
-    console.log(emptySpaces);
-    console.log(userGuess);
+  }
+  emptySpaces = [];
+  emptyWord(randomMonster);
+  lettersGuessedArray = [];
+  document.getElementById("wins").innerHTML = "Wins: " + wins;
+  document.getElementById("remainingGuesses").innerHTML =
+    "Remaining guesses: " + remainingGuesses;
+
+  document.getElementById("lettersGuessed").innerHTML = "Letters guessed: ";
+
+  //handling user input
+  document.onkeypress = function(event) {
+    var userGuess = event.key.toLowerCase();
+
+    if (lettersGuessedArray.indexOf(userGuess) == -1) {
+      lettersGuessedArray.push(userGuess);
+      document.getElementById("lettersGuessed").innerHTML =
+        "Letters guessed: " + lettersGuessedArray;
+      remainingGuesses -= 1;
+      document.getElementById("remainingGuesses").innerHTML =
+        "Remaining guesses: " + remainingGuesses;
+      restartGame();
+    }
+
+    if (randomMonster.includes(userGuess)) {
+      var index = randomMonster.indexOf(userGuess);
+      emptySpaces.splice(index, 1, userGuess);
+      document.getElementById("emptyWord").innerHTML = emptySpaces.join("");
+    }
+  };
+
+  //handling wins and losses
+  function restartGame() {
+    if (emptySpaces.indexOf("_ ") == -1 && remainingGuesses >= 0) {
+      wins++;
+      document.getElementById("wins").innerHTML = "Wins: " + wins;
+      startGame();
+    } else if (remainingGuesses < 0) {
+      startGame();
+    }
   }
 }
 
-document.onkeypress = function(event) {
-  var userGuess = event.key;
-  console.log(userGuess);
-  if (lettersGuessedArray.includes(userGuess) == "false") {
-    lettersGuessedArray.push(userGuess);
-    console.log(lettersGuessedArray);
-    document.getElementById(
-      "lettersGuessed"
-    ).innerHTML = lettersGuessedArray.join("");
-  }
-
-  randomMonster.for(replaceWithGuess(userGuess));
-};
+startGame();
